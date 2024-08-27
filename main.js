@@ -1,7 +1,8 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, shell } = require( 'electron' );
+const { app, BrowserWindow, shell, nativeImage } = require( 'electron' );
 const path = require( 'node:path' );
 const contextMenu = require( 'electron-context-menu' );
+const appIcon = nativeImage.createFromPath( path.join( __dirname, 'public/icon.png' ) );
 
 let mainWindow;
 
@@ -18,7 +19,7 @@ const createWindow = () => {
 			nodeIntegrationInSubFrames: true,
 			preload: path.join( __dirname, 'preload.js' ),
 		},
-		icon: path.join( __dirname, 'public/icons/png/64x64.png' ),
+		icon: appIcon,
 	} );
 
 	// and load the index.html of the app.
@@ -37,6 +38,10 @@ const createWindow = () => {
 		setupExternalLinkHandling();
 		sendNotification();
 	} );
+
+	if ( process.platform === 'darwin' ) {
+		setupDockIcon();
+	}
 };
 
 function setupExternalLinkHandling () {
@@ -65,6 +70,10 @@ function sendNotification () {
 		title: 'WhatsApp Notification',
 		body: 'WhatsApp notified you',
 	} );
+}
+
+function setupDockIcon () {
+	app.dock.setIcon( appIcon );
 }
 
 // This method will be called when Electron has finished

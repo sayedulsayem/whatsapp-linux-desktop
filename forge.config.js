@@ -27,6 +27,20 @@ module.exports = {
 				icon: './public/icons/png/256x256.png'
 			},
 		},
+		{
+			name: '@electron-forge/maker-dmg',
+			platforms: [ 'darwin' ],
+			config: {
+				name: 'whatsapp',
+				title: "whatsapp",
+				icon: './public/icons/mac/icon.icns',
+				contents: [
+					{ "x": 448, "y": 344, "type": "link", "path": "/Applications" },
+					{ "x": 192, "y": 344, "type": "file", "path": "WhatsApp.app" }
+				],
+				format: 'ULFO'
+			}
+		},
 		// {
 		// 	name: '@electron-forge/maker-snap',
 		// 	config: {

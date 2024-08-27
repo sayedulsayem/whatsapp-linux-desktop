@@ -10,15 +10,15 @@
     "package": "electron-forge package",
     "make": "electron-forge make"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/sayedulsayem/whatsapp",
   "keywords": [
     "WhatsApp",
     "whatsapp",
     "meta",
     "linux",
     "chat",
-		"social",
-		"call"
+    "social",
+    "call"
   ],
   "author": {
     "name": "Sayedul Sayem",
@@ -28,7 +28,9 @@
   "devDependencies": {
     "@electron-forge/cli": "^7.4.0",
     "@electron-forge/maker-deb": "^7.4.0",
+    "@electron-forge/maker-dmg": "^7.4.0",
     "@electron-forge/maker-flatpak": "^7.4.0",
+    "@electron-forge/maker-pkg": "^7.4.0",
     "@electron-forge/maker-rpm": "^7.4.0",
     "@electron-forge/maker-snap": "^7.4.0",
     "@electron-forge/maker-squirrel": "^7.4.0",
@@ -36,6 +38,7 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
     "@electron-forge/plugin-fuses": "^7.4.0",
     "@electron/fuses": "^1.8.0",
+    "appdmg": "^0.6.6",
     "electron": "^32.0.1"
   },
   "dependencies": {
