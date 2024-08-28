@@ -4,7 +4,7 @@ const { FuseV1Options, FuseVersion } = require( '@electron/fuses' );
 module.exports = {
 	packagerConfig: {
 		name: 'WhatsApp',
-		executableName: 'WhatsApp',
+		executableName: 'whatsapp-linux-desktop',
 		asar: true,
 		appCategoryType: 'public.app-category.social-networking',
 		icon: './public/icons/icon',
