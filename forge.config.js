@@ -4,10 +4,10 @@ const { FuseV1Options, FuseVersion } = require( '@electron/fuses' );
 module.exports = {
 	packagerConfig: {
 		name: 'WhatsApp',
-		executableName: 'whatsapp-linux-desktop',
+		executableName: 'WhatsApp',
 		asar: true,
 		appCategoryType: 'public.app-category.social-networking',
-		icon: './public/icon.png'
+		icon: './public/icons/icon',
 	},
 	rebuildConfig: {
 		force: true
@@ -24,20 +24,14 @@ module.exports = {
 					maintainer: 'Sayedul Sayem',
 					homepage: 'https://sayedulsayem.com'
 				},
-				icon: './public/icons/png/256x256.png'
+				// icon: './public/icons/png/256x256.png'
 			},
 		},
 		{
 			name: '@electron-forge/maker-dmg',
-			platforms: [ 'darwin' ],
 			config: {
-				name: 'whatsapp',
-				title: "whatsapp",
-				icon: './public/icons/mac/icon.icns',
-				contents: [
-					{ "x": 448, "y": 344, "type": "link", "path": "/Applications" },
-					{ "x": 192, "y": 344, "type": "file", "path": "WhatsApp.app" }
-				],
+				name: 'WhatsApp',
+				title: "WhatsApp",
 				format: 'ULFO'
 			}
 		},
