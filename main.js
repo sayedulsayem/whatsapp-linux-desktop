@@ -2,7 +2,7 @@
 const { app, BrowserWindow, shell, nativeImage } = require( 'electron' );
 const path = require( 'node:path' );
 const contextMenu = require( 'electron-context-menu' );
-const appIcon = nativeImage.createFromPath( path.join( __dirname, 'public/icon.png' ) );
+const appIcon = nativeImage.createFromPath( path.join( __dirname, 'public/icons/icon.png' ) );
 
 let mainWindow;
 

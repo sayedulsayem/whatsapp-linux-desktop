@@ -24,7 +24,7 @@ module.exports = {
 					maintainer: 'Sayedul Sayem',
 					homepage: 'https://sayedulsayem.com'
 				},
-				// icon: './public/icons/png/256x256.png'
+				icon: './public/icons/icon.png'
 			},
 		},
 		{
