@@ -46,6 +46,13 @@ module.exports = {
 		// 		summary: 'An unofficial WhatsApp linux desktop application',
 		// 	}
 		// },
+		{
+			name: '@electron-forge/maker-squirrel',
+			config: {
+				authors: 'Sayedul Sayem',
+				description: 'An unofficial WhatsApp linux desktop application'
+			}
+		}
 	],
 	plugins: [
 		{
