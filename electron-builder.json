@@ -6,7 +6,7 @@
 	"extraResources": [
 		"build/icon.ico"
 	],
-	"appId": "whatsapp-linux-desktop",
+	"appId": "com.sayedulsayem.whatsapp-linux-desktop",
 	"mac": {
 		"category": "build.app-category.social-networking",
 		"target": [
@@ -114,11 +114,11 @@
 			"tar.gz",
 			"deb",
 			"rpm",
-			"snap",
-			"flatpak"
+			"snap"
 		],
+		"asar": true,
 		"executableName": "whatsapp-linux-desktop",
-		"category": "GNOME;GTK;Network;InstantMessaging",
+		"category": "Network;TextTools;Office;GTK;GNOME",
 		"desktop": {
 			"StartupWMClass": "WhatsApp Desktop",
 			"MimeType": "x-scheme-handler/whatsapp-linux-desktop"
@@ -131,6 +131,12 @@
 		]
 	},
 	"snap": {
+		"title": "WhatsApp Desktop",
+		"base": "core22",
+		"category": "Social",
+		"confinement": "strict",
+		"grade": "stable",
+		"summary": "An unofficial WhatsApp Linux Desktop application",
 		"plugs": [
 			"desktop",
 			"desktop-legacy",
@@ -140,14 +146,7 @@
 			"browser-support",
 			"network",
 			"gsettings",
-			"pulseaudio",
-			"opengl",
-			"camera",
-			"audio-playback",
-			"audio-record",
-			"screen-inhibit-control",
-			"upower-observe"
+			"opengl"
 		]
-	},
-	"generateUpdatesFilesForAllChannels": true
+	}
 }

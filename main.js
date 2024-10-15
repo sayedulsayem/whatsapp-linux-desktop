@@ -81,7 +81,7 @@ function setupDockIcon () {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then( () => {
 	contextMenu( {
-		showInspectElement: true, // Hide "Inspect Element" option
+		showInspectElement: false, // Hide "Inspect Element" option
 		prepend: ( params, browserWindow ) => [
 			{
 				label: 'Copy',
