@@ -2,7 +2,7 @@
 const { app, BrowserWindow, shell, nativeImage } = require( 'electron' );
 const path = require( 'node:path' );
 const contextMenu = require( 'electron-context-menu' );
-const appIcon = nativeImage.createFromPath( path.join( __dirname, 'public/icons/icon.png' ) );
+const appIcon = nativeImage.createFromPath( path.join( __dirname, 'build/icon.png' ) );
 
 let mainWindow;
 
@@ -81,7 +81,7 @@ function setupDockIcon () {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then( () => {
 	contextMenu( {
-		showInspectElement: false, // Hide "Inspect Element" option
+		showInspectElement: true, // Hide "Inspect Element" option
 		prepend: ( params, browserWindow ) => [
 			{
 				label: 'Copy',
