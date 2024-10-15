@@ -1,14 +1,15 @@
 {
   "name": "whatsapp-linux-desktop",
-	"productName": "WhatsApp",
+  "productName": "WhatsApp Desktop",
   "version": "1.0.0",
   "description": "An unofficial WhatsApp Linux Desktop application",
   "main": "main.js",
-	"homepage": "https://sayedulsayem.com",
+  "homepage": "https://sayedulsayem.com",
   "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "start": "electron .",
+    "build-mac": "electron-builder -- --publish never --mac --universal",
+    "build-win": "electron-builder -- --publish never --win",
+    "build-linux": "electron-builder -- --publish never --linux"
   },
   "repository": "https://github.com/sayedulsayem/whatsapp",
   "keywords": [
@@ -26,22 +27,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@electron-forge/cli": "^7.4.0",
-    "@electron-forge/maker-deb": "^7.4.0",
-    "@electron-forge/maker-dmg": "^7.4.0",
-    "@electron-forge/maker-flatpak": "^7.4.0",
-    "@electron-forge/maker-pkg": "^7.4.0",
-    "@electron-forge/maker-rpm": "^7.4.0",
-    "@electron-forge/maker-snap": "^7.4.0",
-    "@electron-forge/maker-squirrel": "^7.4.0",
-    "@electron-forge/maker-zip": "^7.4.0",
-    "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
-    "@electron-forge/plugin-fuses": "^7.4.0",
-    "@electron/fuses": "^1.8.0",
-    "electron": "^32.0.1"
+    "electron": "^32.0.1",
+    "electron-builder": "^25.1.8",
+    "electron-notarize": "^1.2.2"
   },
   "dependencies": {
-    "electron-context-menu": "^3",
-    "electron-squirrel-startup": "^1.0.1"
+    "electron-context-menu": "^3"
   }
 }

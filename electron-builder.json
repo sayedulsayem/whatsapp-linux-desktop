@@ -1,0 +1,125 @@
+{
+  "files": [ "main.js", "package.json"],
+  "extraResources": ["build/icon.ico"],
+  "appId": "whatsapp-linux-desktop",
+  "mac": {
+    "category": "build.app-category.social-networking",
+    "target": ["dmg", "pkg", "zip"],
+    "icon": "build/icon.icns",
+    "bundleVersion": "1.0.0",
+    "type": "distribution",
+    "artifactName": "whatsapp-linux-desktop-${version}-${os}.${ext}",
+    "mergeASARs": false,
+    "extendInfo": {
+      "NSMicrophoneUsageDescription": "I need access to your microphone to record the audio you want to send.",
+      "NSCameraUsageDescription": "I need access to your camera to record the video you want to send.",
+      "NSScreenCaptureDescription": "I need access to your screen to share it through video calls when you want to."
+    },
+    "hardenedRuntime": true,
+    "gatekeeperAssess": false,
+    "provisioningProfile": "Desktop.provisionprofile"
+  },
+  "dmg": {
+    "background": "build/background.png",
+    "contents": [
+      {
+        "type": "dir",
+        "x": 100,
+        "y": 211
+      },
+      {
+        "type": "link",
+        "path": "/Applications",
+        "x": 500,
+        "y": 211
+      }
+    ]
+  },
+  "pkg": {
+    "isRelocatable": false,
+    "overwriteAction": "upgrade"
+  },
+  "win": {
+    "target": [
+      {
+        "target": "nsis",
+        "arch": ["x64", "ia32"]
+      },
+      {
+        "target": "msi",
+        "arch": ["x64", "ia32"]
+      },
+      {
+        "target": "zip",
+        "arch": ["x64", "ia32"]
+      }
+    ],
+    "icon": "build/icon.ico",
+    "publisherName": "Sayedul Sayem",
+    "legalTrademarks": "",
+    "verifyUpdateCodeSignature": true,
+    "requestedExecutionLevel": "asInvoker",
+    "signAndEditExecutable": true,
+    "signDlls": false,
+    "artifactName": "whatsapp-linux-desktop-${version}-${os}-${arch}.${ext}"
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowElevation": true,
+    "allowToChangeInstallationDirectory": true,
+    "installerIcon": "build/icon.ico",
+    "uninstallerIcon": "build/icon.ico",
+    "include": "build/installer.nsh",
+    "license": "LICENSE",
+    "deleteAppDataOnUninstall": false,
+    "displayLanguageSelector": false,
+    "unicode": true,
+    "warningsAsErrors": true,
+    "runAfterFinish": true,
+    "createDesktopShortcut": "always",
+    "createStartMenuShortcut": true,
+    "menuCategory": false
+  },
+  "appx": {
+    "backgroundColor": "#2f343d",
+    "languages": ["en-US"],
+    "publisherDisplayName": "Sayedul Sayem",
+    "applicationId": "WhatsApp Desktop",
+    "displayName": "WhatsApp Desktop"
+  },
+  "linux": {
+    "target": ["AppImage", "tar.gz", "deb", "rpm", "snap", "flatpak"],
+    "executableName": "whatsapp-linux-desktop",
+    "category": "GNOME;GTK;Network;InstantMessaging",
+    "desktop": {
+      "StartupWMClass": "WhatsApp Desktop",
+      "MimeType": "x-scheme-handler/whatsapp-linux-desktop"
+    },
+    "artifactName": "whatsapp-linux-desktop-${version}-${os}-${arch}.${ext}"
+  },
+  "rpm": {
+    "fpm": ["--rpm-rpmbuild-define=_build_id_links none"]
+  },
+  "snap": {
+    "plugs": [
+      "desktop",
+      "desktop-legacy",
+      "home",
+      "x11",
+      "unity7",
+      "browser-support",
+      "network",
+      "gsettings",
+      "pulseaudio",
+      "opengl",
+      "camera",
+      "audio-playback",
+      "audio-record",
+      "screen-inhibit-control",
+      "upower-observe"
+    ]
+  },
+  "afterSign": "./build/notarize.js",
+  "generateUpdatesFilesForAllChannels": true
+}
