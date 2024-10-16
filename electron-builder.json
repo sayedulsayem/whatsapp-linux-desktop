@@ -112,8 +112,6 @@
 		"target": [
 			"AppImage",
 			"tar.gz",
-			"deb",
-			"rpm",
 			"snap"
 		],
 		"asar": true,
@@ -132,21 +130,30 @@
 	},
 	"snap": {
 		"title": "WhatsApp Desktop",
-		"base": "core22",
+		"base": "core20",
 		"category": "Social",
 		"confinement": "strict",
 		"grade": "stable",
 		"summary": "An unofficial WhatsApp Linux Desktop application",
 		"plugs": [
+			"alsa",
+			"audio-playback",
+			"audio-record",
+			"browser-support",
+			"camera",
 			"desktop",
 			"desktop-legacy",
-			"home",
-			"x11",
-			"unity7",
-			"browser-support",
-			"network",
 			"gsettings",
-			"opengl"
+			"hardware-observe",
+			"home",
+			"network",
+			"network-bind",
+			"network-status",
+			"opengl",
+			"removable-media",
+			"unity7",
+			"wayland",
+			"x11"
 		]
 	}
 }

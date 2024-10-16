@@ -4,6 +4,8 @@ const path = require( 'node:path' );
 const contextMenu = require( 'electron-context-menu' );
 const appIcon = nativeImage.createFromPath( path.join( __dirname, 'build/icon.png' ) );
 
+app.disableHardwareAcceleration();
+
 let mainWindow;
 
 const createWindow = () => {
