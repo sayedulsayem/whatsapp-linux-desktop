@@ -112,7 +112,11 @@
 		"target": [
 			"AppImage",
 			"tar.gz",
-			"snap"
+			"pacman",
+			"deb",
+			"rpm",
+			"snap",
+			"flatpak"
 		],
 		"asar": true,
 		"executableName": "whatsapp-linux-desktop",

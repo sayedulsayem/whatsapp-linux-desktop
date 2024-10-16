@@ -9,7 +9,11 @@
     "start": "electron .",
     "build-mac": "electron-builder --publish never --mac --universal",
     "build-win": "electron-builder --publish never --win",
-    "build-linux": "electron-builder --publish never --linux"
+    "build-linux-deb": "electron-builder --publish never --linux deb",
+    "build-linux-pacman": "electron-builder --publish never --linux pacman",
+    "build-linux-rpm": "electron-builder --publish never --linux rpm",
+    "build-linux-snap": "electron-builder --publish never --linux snap",
+    "build-linux-flatpak": "electron-builder --publish never --linux flatpak"
   },
   "repository": "https://github.com/sayedulsayem/whatsapp",
   "keywords": [
