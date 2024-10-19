@@ -26,6 +26,7 @@ sudo snap install whatsapp-linux-desktop
 ```
 For Arch, Manjaro, and any other arch based OS
 ```bash
+yay -Syu
 yay -S whatsapp-linux-desktop-bin
 ```
 For snap
