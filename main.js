@@ -1,12 +1,13 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, shell, nativeImage } = require( 'electron' );
+const { app, BrowserWindow, shell, nativeImage, Tray, Menu } = require( 'electron' );
 const path = require( 'node:path' );
 const contextMenu = require( 'electron-context-menu' );
 const appIcon = nativeImage.createFromPath( path.join( __dirname, 'build/icon.png' ) );
 
 app.disableHardwareAcceleration();
 
-let mainWindow;
+let mainWindow = null;
+let tray = null;
 
 const createWindow = () => {
 	// Create the browser window.
@@ -29,6 +30,18 @@ const createWindow = () => {
 		userAgent: 'Mozilla/5.0 (X11; Linux x86_64; Wayland) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36'
 	} );
 
+	mainWindow.on( 'minimize', ( event ) => {
+		event.preventDefault();
+		mainWindow.hide();
+	} );
+
+	mainWindow.on( 'close', ( event ) => {
+		if ( !app.isQuiting ) {
+			event.preventDefault();
+			mainWindow.hide();
+		}
+	} );
+
 	// Open the DevTools.
 	mainWindow.on( 'closed', function () {
 		mainWindow = null;
@@ -44,6 +57,43 @@ const createWindow = () => {
 	if ( process.platform === 'darwin' ) {
 		setupDockIcon();
 	}
+
+	let trayIconPath;
+	if ( app.isPackaged ) {
+		trayIconPath = path.join( process.resourcesPath, 'build/tray-icon.png' );
+	} else {
+		trayIconPath = path.join( __dirname, 'build/tray-icon.png' );
+	}
+	tray = new Tray( trayIconPath );
+	tray.setToolTip( 'WhatsApp Desktop' );
+
+	tray.on( 'click', () => {
+		if ( mainWindow.isVisible() ) {
+			// If the window is visible, hide it
+			mainWindow.hide();
+		} else {
+			// If the window is hidden, show and focus it
+			mainWindow.show();
+			mainWindow.focus();
+		}
+	} );
+
+	const trayMenu = Menu.buildFromTemplate( [
+		{
+			label: 'Show',
+			click: () => {
+				mainWindow.show();
+			},
+		},
+		{
+			label: 'Quit',
+			click: () => {
+				app.isQuiting = true;
+				app.quit();
+			},
+		},
+	] );
+	tray.setContextMenu( trayMenu );
 };
 
 function setupExternalLinkHandling () {
@@ -137,7 +187,15 @@ app.whenReady().then( () => {
 	// dock icon is clicked and there are no other windows open.
 	app.on( 'activate', () => {
 		if ( BrowserWindow.getAllWindows().length === 0 ) {
-			createWindow();
+			if ( mainWindow === null ) {
+				createWindow();
+			} else {
+				if ( !mainWindow.isVisible() ) {
+					mainWindow.show();
+				}
+				mainWindow.focus();
+			}
+			// createWindow();
 		}
 	} );
 } );

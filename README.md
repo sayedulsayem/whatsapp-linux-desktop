@@ -27,7 +27,7 @@ sudo snap install whatsapp-linux-desktop
 For Arch, Manjaro, and any other arch based OS
 ```bash
 yay -Syu
-yay -S whatsapp-linux-desktop-bin
+yay -S whatsapp-linux-desktop
 ```
 For snap
 ```bash
@@ -53,6 +53,8 @@ npm run build-linux-snap # only for snap
 
 
 **Changelogs:**
+* **1.1.0**
+	* New: Added minimize to system tray functionality for improved multitasking.
 * **1.0.1**
 	* New: Release native pacman package to install on Arch Linux
 	* New: Release native Debian package to install natively

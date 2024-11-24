@@ -6,7 +6,11 @@
 	],
 	"extraResources": [
 		"LICENSE",
-		"build/icon.png"
+		"build/icon.png",
+		"build/tray-icon.png"
+	],
+	"asarUnpack": [
+		"build/"
 	],
 	"appId": "com.sayedulsayem.whatsapp-linux-desktop",
 	"linux": {
