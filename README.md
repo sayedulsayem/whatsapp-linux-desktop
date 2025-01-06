@@ -12,7 +12,7 @@ Experience WhatsApp directly on your Linux desktop with this lightweight and eff
 
 * **Native Desktop Experience:** Use WhatsApp like a native application on your Linux system.
 * **Seamless Notifications:** Get instant notifications for messages and calls directly on your desktop.
-* **Full Functionality:** Access all the features you love from WhatsApp Web, including text messaging, voice, video calls, and file sharing.
+* **Full Functionality:** Access all the features you love from WhatsApp Web, including text messaging, voice messaging, and file sharing.
 * **Cross-platform Compatibility:** Works flawlessly across different Linux distributions thanks to Snapcraft packaging.
 * **Automatic Updates:** Receive updates and new features automatically through the Snap Store.
 
