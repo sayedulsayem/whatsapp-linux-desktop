@@ -22,9 +22,17 @@
 		"asar": true,
 		"executableName": "whatsapp-linux-desktop",
 		"category": "Network;TextTools;Office;GTK;GNOME",
+		"protocols": [
+			{
+				"name": "WhatsApp Deep Link",
+				"schemes": [
+					"whatsapp"
+				]
+			}
+		],
 		"desktop": {
 			"StartupWMClass": "WhatsApp Desktop",
-			"MimeType": "x-scheme-handler/whatsapp-linux-desktop"
+			"MimeType": "x-scheme-handler/whatsapp-linux-desktop;x-scheme-handler/whatsapp"
 		},
 		"artifactName": "whatsapp-linux-desktop-${version}-${arch}.${ext}",
 		"icon": "build/icon.png"
