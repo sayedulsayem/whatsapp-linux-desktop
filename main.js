@@ -1,12 +1,19 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, shell, nativeImage } = require( 'electron' );
+const { app, BrowserWindow, shell, nativeImage, Tray, Menu } = require( 'electron' );
 const path = require( 'node:path' );
 const contextMenu = require( 'electron-context-menu' );
 const appIcon = nativeImage.createFromPath( path.join( __dirname, 'build/icon.png' ) );
 
+const cliArgs = process.argv.slice( 1 );
+const shouldStartMinimized = cliArgs.includes( '--start-minimized' ) || cliArgs.includes( '--minimized' );
+const shouldStartInTray = cliArgs.includes( '--start-in-tray' ) || cliArgs.includes( '--tray' ) || cliArgs.includes( '--hidden' );
+const shouldStartHidden = shouldStartMinimized || shouldStartInTray;
+
 app.disableHardwareAcceleration();
 
 let mainWindow;
+let tray;
+let isQuitting = false;
 
 const createWindow = () => {
 	// Create the browser window.
@@ -15,6 +22,7 @@ const createWindow = () => {
 		height: 800,
 		autoHideMenuBar: true,
 		frame: true,
+		show: false,
 		webPreferences: {
 			nodeIntegration: true,
 			webviewTag: true,
@@ -41,10 +49,94 @@ const createWindow = () => {
 		sendNotification();
 	} );
 
+	mainWindow.once( 'ready-to-show', () => {
+		if ( shouldStartHidden ) {
+			mainWindow.hide();
+		} else {
+			mainWindow.show();
+		}
+	} );
+
+	mainWindow.on( 'minimize', event => {
+		event.preventDefault();
+		mainWindow.hide();
+	} );
+
+	mainWindow.on( 'close', event => {
+		if ( isQuitting ) {
+			return;
+		}
+
+		event.preventDefault();
+
+		if ( process.platform === 'darwin' ) {
+			app.hide();
+		} else {
+			mainWindow.hide();
+		}
+	} );
+
 	if ( process.platform === 'darwin' ) {
 		setupDockIcon();
 	}
 };
+
+function setupTray () {
+	if ( tray ) {
+		return;
+	}
+
+	tray = new Tray( appIcon );
+	tray.setToolTip( 'WhatsApp Desktop' );
+
+	const trayMenu = Menu.buildFromTemplate( [
+		{
+			label: 'Show',
+			click: () => {
+				showMainWindow();
+			}
+		},
+		{
+			label: 'Hide to Tray',
+			click: () => {
+				if ( mainWindow?.isVisible() ) {
+					mainWindow.hide();
+				}
+			}
+		},
+		{ type: 'separator' },
+		{
+			label: 'Exit',
+			click: () => {
+				isQuitting = true;
+				app.quit();
+			}
+		}
+	] );
+
+	tray.setContextMenu( trayMenu );
+
+	tray.on( 'click', () => {
+		showMainWindow();
+	} );
+}
+
+function showMainWindow () {
+	if ( !mainWindow || mainWindow.isDestroyed() ) {
+		createWindow();
+		return;
+	}
+
+	if ( !mainWindow.isVisible() ) {
+		mainWindow.show();
+	}
+
+	if ( mainWindow.isMinimized() ) {
+		mainWindow.restore();
+	}
+
+	mainWindow.focus();
+}
 
 function setupExternalLinkHandling () {
 	// Open external links in the default browser
@@ -132,6 +224,7 @@ app.whenReady().then( () => {
 	} );
 
 	createWindow();
+	setupTray();
 
 	// On OS X it's common to re-create a window in the app when the
 	// dock icon is clicked and there are no other windows open.
@@ -148,6 +241,15 @@ app.whenReady().then( () => {
 app.on( 'window-all-closed', () => {
 	if ( process.platform !== 'darwin' ) {
 		app.quit();
+	}
+} );
+
+app.on( 'before-quit', () => {
+	isQuitting = true;
+
+	if ( tray ) {
+		tray.destroy();
+		tray = null;
 	}
 } );
 

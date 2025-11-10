@@ -40,6 +40,13 @@ Clone  the repository and run the following commands to run the application:
 npm install
 npm run start
 ```
+
+To start the application minimized in the system tray, append one of the following flags after `npm start`:
+
+```bash
+npm start -- --start-in-tray
+# aliases: --tray, --hidden, --start-minimized, --minimized
+```
 ### Build
 Clone  the repository and run the following commands to run the application:
 ```bash
